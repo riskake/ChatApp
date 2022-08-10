@@ -1,3 +1,22 @@
 .homeHeader {
     text-align: center;
 }
+
+.homeSubheader {
+    font-style: italic;
+}
+
+.chatContainer {
+    margin: auto;
+}
+
+.chatbox {
+    height: 250px;
+    width: 222.5px;
+    background-color: white;
+    margin: auto;
+}
+
+.typeContainer {
+    margin-top: 20px;
+}
