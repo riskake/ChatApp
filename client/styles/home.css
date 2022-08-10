@@ -1,12 +1,12 @@
-.homeHeader {
+.home_header {
     text-align: center;
 }
 
-.homeSubheader {
+.home_subheader {
     font-style: italic;
 }
 
-.chatContainer {
+.chat_container {
     margin: auto;
 }
 
@@ -17,6 +17,6 @@
     margin: auto;
 }
 
-.typeContainer {
+.type_container {
     margin-top: 20px;
 }

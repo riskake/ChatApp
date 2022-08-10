@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Home from './components/Home.jsx';
 
 ReactDOM.render(
-    <div className='appContainer'>
+    <div className='app_container'>
         <BrowserRouter>
             <Routes>
                 <Route path={"/"} element={<Home />} />
