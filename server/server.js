@@ -4,12 +4,16 @@ import { MessageRoute } from "./routes/messageroute.js";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import BodyParser from "body-parser";
+import http from "http";
+import cors from "cors";
+import { Server } from "socket.io";
 
 dotenv.config();
 
 const app = express();
 app.use(BodyParser.json());
 app.use(express.static("../client/dist"));
+app.use(cors());
 
 app.use("/api/message", MessageRoute);
 mongoose.connect(process.env.DATABASE_CONNECTION).then(() => {
@@ -27,3 +31,18 @@ app.use((req, res, next) => {
 const server = app.listen(process.env.PORT || 3000, () => {
     console.log(`Started on http://localhost:${server.address().port}`);
 });
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  }, 
+});
+
+io.on("connection", (socket) => {
+  console.log(socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("User Disconnected", socket.id);
+  })
+})
