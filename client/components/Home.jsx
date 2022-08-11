@@ -22,11 +22,11 @@ const Home = () => {
         getMessages();
     }, []);
 
-    const sendMessage = async () => {
-        await fetch('/api/message/postmessage', {
-            method: 'POST',
+    const sendMessage = async (req, res) => {
+        await fetch("/api/message/postmessage", {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json'
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 message: messageToSend,
@@ -35,10 +35,10 @@ const Home = () => {
         }).then((res) => { return res.json })
             .then((data) => { 
                 if (data.status === "OK") {
-                    alert("The message was posted")
+                    alert("The message was posted");
                 } 
             }).catch((error) => { 
-                console.log(error) 
+                console.log(error);
             })
     };
 
@@ -50,7 +50,7 @@ const Home = () => {
     return(
         <div className="home_header">
             <h1>ChatApp</h1>
-            <p className="home_subheader">Best online chat since 2022...</p>
+            <p className="home_subheader">Beste chatte-app siden 2022...</p>
             <div className="chat_container">
                 <div className="chatbox">
                 {
