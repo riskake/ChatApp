@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 
 const Home = () => {
 
-    const [messagesToShow, setMessagesToShow] = useState([{message: "hei", userName: "Pelle"}]);
+    const [messagesToShow, setMessagesToShow] = useState();
     const [messageToSend, setMessageToSend] = useState("");
     
     const getMessages = async () => {
@@ -48,24 +49,27 @@ const Home = () => {
     };
 
     return(
-        <div className="home_header">
-            <h1>ChatApp</h1>
-            <p className="home_subheader">Beste chatte-app siden 2022...</p>
-            <div className="chat_container">
-                <div className="chatbox">
-                {
-                    // messages.Map((item, index) => (
-                    //     <li key={item._id}>
-                    //         {item.message}
-                    //     </li>
-                    // ))
-                }
-                </div>
-                <div className="type_container">
-                    <form onSubmit={(e) => handleSubmit(e)}>
-                        <input type="text" value={messageToSend} placeholder="Skriv en melding..." onChange={(e) => setMessageToSend(e.target.value)} />
-                        <input type="submit" value="Send"></input>
-                    </form>
+        <div>
+            <Navbar></Navbar>
+            <div className='home_container'>
+                <h1>ChatApp</h1>
+                <p className="home_subheader">Beste chatte-app siden 2022...</p>
+                <div>
+                    <div className="chatbox">
+                    {
+                        // messages.Map((item, index) => (
+                        //     <li key={item._id}>
+                        //         {item.message}
+                        //     </li>
+                        // ))
+                    }
+                    </div>
+                    <div className="type_container">
+                        <form onSubmit={(e) => handleSubmit(e)}>
+                            <input type="text" value={messageToSend} placeholder="Skriv en melding..." onChange={(e) => setMessageToSend(e.target.value)} />
+                            <input type="submit" value="Send"></input>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
