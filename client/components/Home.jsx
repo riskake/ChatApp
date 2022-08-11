@@ -15,7 +15,7 @@ const Home = () => {
                     alert(error);
                 });
         } catch(error) {
-            console.log(error);
+            alert(error);
         };
     };
 
@@ -24,23 +24,28 @@ const Home = () => {
     }, []);
 
     const sendMessage = async (req, res) => {
-        await fetch("/api/message/postmessage", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: messageToSend,
-                userName: "Pelle",
-            })
-        }).then((res) => { return res.json })
-            .then((data) => { 
-                if (data.status === "OK") {
-                    alert("The message was posted");
-                } 
-            }).catch((error) => { 
-                console.log(error);
-            })
+        try {
+            await fetch("/api/message/postmessage", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    message: messageToSend,
+                    userName: "Pelle",
+                })
+            }).then((res) => { return res.json })
+                .then((data) => { 
+                    if (data.status === "OK") {
+                        alert("The message was posted");
+                    } 
+                }).catch((error) => { 
+                    console.log(error);
+                });
+        }
+        catch(error) {
+            alert(error);
+        }
     };
 
     const handleSubmit = (e) => {

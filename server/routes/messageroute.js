@@ -5,12 +5,13 @@ export const MessageRoute = new express.Router();
 
 MessageRoute.get("/getmessages", async (req, res) => { 
     try {
-    const messages = await Message.find();
-    res.json(messages);
-} catch (error){
-    res.json({ status: "error", message: error });
-    console.log(error);
-}});
+        const messages = await Message.find();
+        res.json(messages);
+    } catch (error){
+        console.log(error);
+        res.json({ status: "error", message: error });
+    }
+});
 
 MessageRoute.post("/postmessage", async (req, res) => {
     const { message, userName } = req.body;
@@ -19,8 +20,9 @@ MessageRoute.post("/postmessage", async (req, res) => {
         return res.json({status: "ok", data: messageBody});
     } catch (error) {
         if (error) {
+            console.log(error);
             return res.sendStatus(400);
         }
     }
     return res.sendStatus(200);
-})
+});
