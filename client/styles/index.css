@@ -1,7 +1,10 @@
 .app_container {
     width: 450px;
     height: 500px;
-    background-color: red;
-    margin: auto;
+    background-color: #c8c8b4;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
     padding: 20px;
+    border-radius: 50px;
 }
