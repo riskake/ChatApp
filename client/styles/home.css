@@ -6,15 +6,3 @@
 .home_subheader {
     font-style: italic;
 }
-
-.chatbox {
-    height: 250px;
-    width: 222.5px;
-    background-color: white;
-    margin: auto;
-}
-
-.type_container {
-    margin-top: 20px;
-    text-align: center;
-}
