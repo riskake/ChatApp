@@ -7,7 +7,7 @@ const Home = () => {
 
     const socket = io.connect("http://localhost:3000");
 
-    const [userName, setUserName] = useState("Per");
+    const [userName, setUserName] = useState("Eksempelbruker");
     const [roomID, setRoomID] = useState(); 
     const [showChat, setShowChat] = useState(false);
 
