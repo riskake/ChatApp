@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return(
         <div className="navbar">
-            <button onClick={toLogin} className="navbar_loginButton">Log out</button>
+            <button onClick={toLogin} className="navbar_loginButton">Logg ut</button>
         </div>
     )
 }
