@@ -17,26 +17,26 @@ app.use(cors());
 
 app.use("/api/message", MessageRoute);
 mongoose.connect(process.env.DATABASE_CONNECTION).then(() => {
-    console.log("Connected to MongoDB...");
+  console.log("Connected to MongoDB...");
 });
 
 app.use((req, res, next) => {
-    if (req.method === "GET" && !req.path.startsWith("/api")) {
-      res.sendFile(path.resolve("../client/dist/index.html"));
-    } else {
-      next();
-    }
-  });
-  
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    res.sendFile(path.resolve("../client/dist/index.html"));
+  } else {
+    next();
+  }
+});
+
 const server = app.listen(process.env.PORT || 3000, () => {
-    console.log(`Started on http://localhost:${server.address().port}`);
+  console.log(`Started on http://localhost:${server.address().port}`);
 });
 
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:3000",
     methods: ["GET", "POST"],
-  }, 
+  },
 });
 
 io.on("connection", (socket) => {
@@ -54,4 +54,4 @@ io.on("connection", (socket) => {
   socket.on("disconnect", () => {
     console.log("User Disconnected", socket.id);
   });
-})
+});

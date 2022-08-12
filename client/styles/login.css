@@ -1,16 +1,11 @@
 .login_container {
-    text-align: center;
+  text-align: center;
 }
 
 .login_loginGroup {
-    margin-top: 50px;
-}
-
-.login_linkGroup {
-    margin-top: 100px;
+  margin-top: 50px;
 }
 
 .login_subHeader {
-    font-weight: bold;
+  font-weight: bold;
 }
-
