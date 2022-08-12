@@ -54,7 +54,7 @@ const Login = () => {
                     </input>
                     <br/><br/>
                     <input 
-                        type="text" 
+                        type="password" 
                         placeholder="Passord..."
                         value={passwordToBeCreated} 
                         onChange={(e) => setPasswordToBeCreated(e.target.value)}>
@@ -75,7 +75,7 @@ const Login = () => {
                     </input>
                     <br/><br/>
                     <input 
-                        type="text" 
+                        type="password" 
                         placeholder="Passord..." 
                         value={passwordInput}
                         onChange={(e) => setPasswordInput(e.target.value)}>
