@@ -9,8 +9,8 @@ ReactDOM.render(
     <div className='app_container'>
         <BrowserRouter>
             <Routes>
-                <Route path={"/"} element={<Home />} />
-                <Route path={"/login"} element={<Login />} />
+                <Route path={"/home"} element={<Home />} />
+                <Route path={"/"} element={<Login />} />
             </Routes>
         </BrowserRouter>
     </div>, 

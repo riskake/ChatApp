@@ -9,7 +9,7 @@ const Home = () => {
 
     const [userName, setUserName] = useState("Per");
     const [roomID, setRoomID] = useState(); 
-    const [showChat, setShowChat] = useState(false );
+    const [showChat, setShowChat] = useState(false);
 
     const joinRoom = () => {
          if (userName !== "" && roomID !== "") {

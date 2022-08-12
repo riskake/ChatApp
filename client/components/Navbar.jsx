@@ -4,7 +4,7 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const toLogin = () => {
-        navigate("/login");
+        navigate("/");
     }
 
     return(
