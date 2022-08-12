@@ -18,10 +18,6 @@ const Home = () => {
          }
     };
 
-        useEffect (() => {
-        getMessages();
-    }, []);
-
     return(
         <div>
             <Navbar></Navbar>
@@ -47,35 +43,3 @@ const Home = () => {
 }
 
 export default Home;
-
-//POST MESSAGE
-
-// const sendMessage = async (req, res) => {
-//     try {
-//         await fetch("/api/message/postmessage", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json"
-//             },
-//             body: JSON.stringify({
-//                 message: messageToSend,
-//                 userName: "Pelle",
-//             })
-//         }).then((res) => { return res.json })
-//             .then((data) => { 
-//                 if (data.status === "OK") {
-//                     alert("The message was posted");
-//                 } 
-//             }).catch((error) => { 
-//                 console.log(error);
-//             });
-//     }
-//     catch(error) {
-//         alert(error);
-//     }
-// };
-
-// const handleSubmit = (e) => {
-//     e.preventDefault();
-//     sendMessage();
-// };

@@ -5,19 +5,6 @@ const Chat = ({socket, userName, roomID}) => {
     const [currentMessage, setCurrentMessage] = useState();
     const [messageList, setMessageList] = useState([]);
 
-    const getMessages = async () => {
-      try {
-          await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
-              .then((res) => { return res.json() })
-              .then((data) => { setMessageList(data)})
-              .catch((error) => { 
-                  alert(error);
-              });
-      } catch(error) {
-          alert(error);
-      };
-    };
-
     const saveMessage = async (req, res) => {
       try {
           await fetch("/api/message/postmessage", {
@@ -102,3 +89,20 @@ const Chat = ({socket, userName, roomID}) => {
 }
 
 export default Chat;
+
+// GET ALL MESSAGES AND SET THEM TO THE STATE GETMESSAGES
+// const getMessages = async () => {
+  //   try {
+  //       await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
+  //           .then((res) => { return res.json() })
+  //           .then((data) => { setMessageList(data)})
+  //           .catch((error) => { 
+  //               alert(error);
+  //           });
+  //   } catch(error) {
+  //       alert(error);
+  //   };
+  // };
+//   useEffect (() => {
+//     getMessages();
+// }, []);
