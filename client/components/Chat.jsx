@@ -5,6 +5,44 @@ const Chat = ({socket, userName, roomID}) => {
     const [currentMessage, setCurrentMessage] = useState();
     const [messageList, setMessageList] = useState([]);
 
+    const getMessages = async () => {
+      try {
+          await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
+              .then((res) => { return res.json() })
+              .then((data) => { setMessageList(data)})
+              .catch((error) => { 
+                  alert(error);
+              });
+      } catch(error) {
+          alert(error);
+      };
+    };
+
+    const saveMessage = async (req, res) => {
+      try {
+          await fetch("/api/message/postmessage", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json"
+              },
+              body: JSON.stringify({
+                  message: currentMessage,
+                  userName: userName,
+              })
+          }).then((res) => { return res.json })
+              .then((data) => { 
+                  if (data.status === "OK") {
+                      alert("The message was posted");
+                  } 
+              }).catch((error) => { 
+                  console.log(error);
+              });
+      }
+      catch(error) {
+          alert(error);
+      }
+  };
+
     const sendMessage = async () => {
     if (currentMessage !== "") {
       const messageData = {
@@ -18,6 +56,7 @@ const Chat = ({socket, userName, roomID}) => {
       };
 
       await socket.emit("send_message", messageData);
+      saveMessage();
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
     }

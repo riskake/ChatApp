@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Chat from "./Chat";
 
 const Home = () => {
+
     const socket = io.connect("http://localhost:3000");
 
     const [userName, setUserName] = useState("Per");
@@ -16,6 +17,10 @@ const Home = () => {
             setShowChat(true);
          }
     };
+
+        useEffect (() => {
+        getMessages();
+    }, []);
 
     return(
         <div>
@@ -43,22 +48,7 @@ const Home = () => {
 
 export default Home;
 
-// const getMessages = async () => {
-//     try {
-//         await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
-//             .then((res) => { return res.json() })
-//             .then((data) => { setMessagesToShow(data)})
-//             .catch((error) => { 
-//                 alert(error);
-//             });
-//     } catch(error) {
-//         alert(error);
-//     };
-// };
-
-// useEffect (() => {
-//     getMessages();
-// }, []);
+//POST MESSAGE
 
 // const sendMessage = async (req, res) => {
 //     try {
