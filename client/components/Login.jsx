@@ -23,8 +23,6 @@ const Login = () => {
         <div className="login_linkGroup">
             <p>Har du ikke en bruker?</p>
             <a href="https://www.w3schools.com">Lag en bruker</a>
-            <p>Eller:</p>
-            <a href="https://www.w3schools.com">Chat anonymt</a>
         </div>
     </div>
  )

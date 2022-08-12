@@ -1,51 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import io from "socket.io-client";
 import Navbar from './Navbar';
+import Chat from "./Chat";
 
 const Home = () => {
+    const socket = io.connect("http://localhost:3000");
 
-    const [messagesToShow, setMessagesToShow] = useState();
-    const [messageToSend, setMessageToSend] = useState("");
-    
-    const getMessages = async () => {
-        try {
-            await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
-                .then((res) => { return res.json() })
-                .then((data) => { setMessagesToShow(data)})
-                .catch((error) => { 
-                    alert(error);
-                });
-        } catch(error) {
-            console.log(error);
-        };
-    };
+    const [userName, setUserName] = useState("Per");
+    const [roomID, setRoomID] = useState(); 
+    const [showChat, setShowChat] = useState(false );
 
-    useEffect (() => {
-        getMessages();
-    }, []);
-
-    const sendMessage = async (req, res) => {
-        await fetch("/api/message/postmessage", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: messageToSend,
-                userName: "Pelle",
-            })
-        }).then((res) => { return res.json })
-            .then((data) => { 
-                if (data.status === "OK") {
-                    alert("The message was posted");
-                } 
-            }).catch((error) => { 
-                console.log(error);
-            })
-    };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        sendMessage();
+    const joinRoom = () => {
+         if (userName !== "" && roomID !== "") {
+            socket.emit("join_room", roomID);
+            setShowChat(true);
+         }
     };
 
     return(
@@ -54,26 +23,69 @@ const Home = () => {
             <div className='home_container'>
                 <h1>ChatApp</h1>
                 <p className="home_subheader">Beste chatte-app siden 2022...</p>
-                <div>
-                    <div className="chatbox">
-                    {
-                        // messages.Map((item, index) => (
-                        //     <li key={item._id}>
-                        //         {item.message}
-                        //     </li>
-                        // ))
-                    }
+                {!showChat ? (
+                    <div className='chat_container'>
+                        <div>
+                            <h3>Bli med i et chatterom!</h3>
+                            <input type="text" placeholder="Rom ID" onChange={(event) => {
+                                setRoomID(event.target.value);
+                            }}></input>
+                            <button onClick={joinRoom}>Bli med</button>
+                        </div>
                     </div>
-                    <div className="type_container">
-                        <form onSubmit={(e) => handleSubmit(e)}>
-                            <input type="text" value={messageToSend} placeholder="Skriv en melding..." onChange={(e) => setMessageToSend(e.target.value)} />
-                            <input type="submit" value="Send"></input>
-                        </form>
-                    </div>
-                </div>
+                )
+                : (<Chat socket={socket} userName={userName} room={roomID}></Chat>)
+                }
             </div>
         </div>
     );
 }
 
 export default Home;
+
+// const getMessages = async () => {
+//     try {
+//         await fetch("/api/message/getmessages", { method: "GET", headers: { "Content-Type": "application/json"}})
+//             .then((res) => { return res.json() })
+//             .then((data) => { setMessagesToShow(data)})
+//             .catch((error) => { 
+//                 alert(error);
+//             });
+//     } catch(error) {
+//         alert(error);
+//     };
+// };
+
+// useEffect (() => {
+//     getMessages();
+// }, []);
+
+// const sendMessage = async (req, res) => {
+//     try {
+//         await fetch("/api/message/postmessage", {
+//             method: "POST",
+//             headers: {
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({
+//                 message: messageToSend,
+//                 userName: "Pelle",
+//             })
+//         }).then((res) => { return res.json })
+//             .then((data) => { 
+//                 if (data.status === "OK") {
+//                     alert("The message was posted");
+//                 } 
+//             }).catch((error) => { 
+//                 console.log(error);
+//             });
+//     }
+//     catch(error) {
+//         alert(error);
+//     }
+// };
+
+// const handleSubmit = (e) => {
+//     e.preventDefault();
+//     sendMessage();
+// };
